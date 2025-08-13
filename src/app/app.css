@@ -1,0 +1,14 @@
+.bg-seat-available {
+  background: #E7ECEC;
+}
+.bg-seat-taken {
+  background: #FF645A;
+  box-shadow: 0 8px 16px -4px #ff655a95;
+}
+.bg-seat-selected {
+  background: white;
+  box-shadow: 0 0 8px 2px white;
+}
+.bg-seat-hidden {
+  background: #e5e7eb;
+}
