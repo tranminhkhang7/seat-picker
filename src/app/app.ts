@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Seat } from './interfaces/seats';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AudienceMember } from './interfaces/audienceMember';
+import { AudienceMember, audienceMembers } from './interfaces/audienceMember';
 import { TheaterData } from './interfaces/theaterData';
 
 @Component({
@@ -21,16 +21,18 @@ export class App {
   filteredSuggestions: AudienceMember[] = [];
 
   // Sample audience data - replace with your actual data
-  audienceMembers: AudienceMember[] = [
-    { id: 'TMKH', name: 'Trần Minh Khang' },
-    { id: 'MB789', name: 'Mike Brown' },
-    { id: 'DW345', name: 'This is a very long name for testing purpose' },
-    { id: 'LT678', name: 'Lisa Taylor' },
-    { id: 'RM901', name: 'Robert Miller' },
-    { id: 'AM234', name: 'Anna Martinez' },
-    { id: 'JG567', name: 'James Garcia' },
-    { id: 'MR890', name: 'Maria Rodriguez' },
-  ];
+  // audienceMembers: AudienceMember[] = [
+  //   { id: 'TMKH', name: 'Trần Minh Khang' },
+  //   { id: 'MB789', name: 'Mike Brown' },
+  //   { id: 'DW345', name: 'This is a very long name for testing purpose' },
+  //   { id: 'LT678', name: 'Lisa Taylor' },
+  //   { id: 'RM901', name: 'Robert Miller' },
+  //   { id: 'AM234', name: 'Anna Martinez' },
+  //   { id: 'JG567', name: 'James Garcia' },
+  //   { id: 'MR890', name: 'Maria Rodriguez' },
+  // ];
+
+  audienceMembers: AudienceMember[] = audienceMembers;
 
   ngOnInit() {
     this.generateSeats();
@@ -214,7 +216,9 @@ export class App {
     const oldId = seat.audienceId;
 
     if (oldId !== newId && this.assignedAudienceIds.has(newId)) {
-      alert('This audience ID is already assigned to another seat');
+      const assignedSeat = this.seats.find((s) => s.audienceId === newId);
+      const assignedSeatInfo = assignedSeat ? `${assignedSeat.id}` : 'n/a';
+      alert(`🚨 ALREADY ASSIGNED TO ANOTHER SEAT ‼️ at ${assignedSeatInfo}`);
       return;
     }
 
@@ -278,7 +282,7 @@ export class App {
     };
 
     localStorage.setItem('theaterData', JSON.stringify(data));
-    alert('Data saved successfully!');
+    alert('Successfully ✅ ✨');
   }
 
   loadData() {
